@@ -1,22 +1,21 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./Pages/index";
-import createBooks from "./Pages/createBooks";
-import showBooks from "./Pages/showBooks";
-import editBooks from "./Pages/editBooks";
-import deleteBooks from "./Pages/deleteBooks";
+import Home from "./Pages/Index";
+import CreateBooks from "./Pages/CreateBooks";
+import ShowBooks from "./Pages/ShowBooks";
+import EditBooks from "./Pages/EditBooks";
+import DeleteBooks from "./Pages/DeleteBooks";
 
 const App = () => {
   return (
-    <Home />
-    // <Routes>
-    //   <Route path="/" element={home} />
-    //   <Route path="books/create" element={createBooks} />
-    //   <Route path="/books/details/:id" element={showBooks} />
-    //   <Route path="/books/edit/:id" element={editBooks} />
-    //   <Route path="/books/delete/:id" element={deleteBooks} />
-    // </Routes>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/books/create" element={<CreateBooks />} />
+      <Route path="/books/details/:id" element={<ShowBooks />} />
+      <Route path="/books/edit/:id" element={<EditBooks />} />
+      <Route path="/books/delete/:id" element={<DeleteBooks />} />
+    </Routes>
   );
 };
 
