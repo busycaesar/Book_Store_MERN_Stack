@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import BackButton from "../Components/BackButton";
 import Spinner from "../Components/Spinner";
 
-export default function showBooks() {
+export default function ShowBook() {
   return (
     <div>
       <h1>Show Book</h1>
