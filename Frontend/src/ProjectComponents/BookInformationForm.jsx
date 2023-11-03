@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 
@@ -6,14 +7,15 @@ import { useState } from "react";
 // Requirements:
 // i. The function to be called upon submitting the form.
 // ii. Name of the submit button.
+// iii. book object if the form fields needs to be updated with the initial information.
 
 // Deliverables:
 // i. Passings a filled book object as a function argument, which was asked to calling upon submitting the form.
 
 export default function BookInformationForm(props) {
-  const [title, setTitle] = useState(""),
-    [author, setAuthor] = useState(""),
-    [publishYear, setPublishYear] = useState("");
+  const [title, setTitle] = useState(props.bookData?.title || ""),
+    [author, setAuthor] = useState(props.bookData?.author || ""),
+    [publishYear, setPublishYear] = useState(props.bookData?.publishYear || "");
   let handleSaveBook = props.handleSaveBook,
     buttonName = props.buttonName,
     bookData = { title, author, publishYear };
