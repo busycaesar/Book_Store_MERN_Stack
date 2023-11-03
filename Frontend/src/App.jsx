@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./Pages/Index";
-import CreateBooks from "./Pages/CreateBooks";
-import ShowBooks from "./Pages/ShowBooks";
-import EditBooks from "./Pages/EditBooks";
-import DeleteBooks from "./Pages/DeleteBooks";
+import Home from "./Pages/index";
+import CreateBooks from "./Pages/CreateBook";
+import ShowBooks from "./Pages/ShowBook";
+import EditBooks from "./Pages/EditBook";
+import DeleteBooks from "./Pages/DeleteBook";
 
 const App = () => {
   return (
