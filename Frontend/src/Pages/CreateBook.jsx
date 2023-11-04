@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
-import BackButton from "../Components/BackButton";
-import Spinner from "../Components/Spinner";
+import React, { useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { LoadingContext, BackButtonContext } from "../App";
 import BookInformationForm from "../ProjectComponents/bookInformationForm";
 
 export default function CreateBooks() {
-  const [loading, setLoading] = useState(""),
+  const { loading, setLoading, spinner } = useContext(LoadingContext),
+    backButton = useContext(BackButtonContext),
     navigate = useNavigate(),
     handleSaveBook = (bookdata) => {
       setLoading(true);
@@ -26,9 +26,9 @@ export default function CreateBooks() {
     };
   return (
     <div className="p-4">
-      <BackButton />
+      {backButton}
       <h1 className="text-3xl my-4">Create Book</h1>
-      {loading ? <Spinner /> : null}
+      {loading ? spinner : null}
       <BookInformationForm handleSaveBook={handleSaveBook} buttonName="Save" />
     </div>
   );

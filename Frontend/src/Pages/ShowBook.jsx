@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import BackButton from "../Components/BackButton";
-import Spinner from "../Components/Spinner";
+import { LoadingContext, BackButtonContext } from "../App";
 
 export default function ShowBook() {
   const [book, setBook] = useState({}),
-    [loading, setLoading] = useState(false),
-    { id } = useParams();
+    { id } = useParams(),
+    { loading, setLoading, spinner } = useContext(LoadingContext.loading),
+    backButton = useContext(BackButtonContext);
   useEffect(() => {
     setLoading(true);
     axios
@@ -22,10 +22,10 @@ export default function ShowBook() {
   }, []);
   return (
     <div className="p-4">
-      <BackButton />
+      {backButton}
       <h1 className="text-3xl my-4">Show Book</h1>
       {loading ? (
-        <Spinner />
+        spinner
       ) : (
         <div className="flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4">
           <div className="my-4">

@@ -1,17 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
-import BackButton from "../Components/BackButton";
-import Spinner from "../Components/Spinner";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { LoadingContext, BackButtonContext } from "../App";
 import BookInformationForm from "../ProjectComponents/bookInformationForm";
 
 export default function EditBooks() {
-  const [loading, setLoading] = useState(""),
-    [book, setBook] = useState({}),
+  const [book, setBook] = useState({}),
     navigate = useNavigate(),
     { id } = useParams(),
+    { loading, setLoading, spinner } = useContext(LoadingContext),
+    backButton = useContext(BackButtonContext),
     handleSaveBook = (bookData) => {
       setLoading(true);
       axios
@@ -27,9 +27,13 @@ export default function EditBooks() {
         });
     };
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`http://localhost:5555/books/${id}`)
-      .then((res) => setBook(res.data))
+      .then((res) => {
+        setLoading(false);
+        setBook(res.data);
+      })
       .catch((err) => {
         setLoading(false);
         alert("ERROR");
@@ -38,17 +42,17 @@ export default function EditBooks() {
   }, []);
   return (
     <div className="p-4">
-      <BackButton />
+      {backButton}
       <h1 className="text-3xl my-4">Edit Book</h1>
-      {loading ? <Spinner /> : null}
-      {Object.keys(book).length > 0 ? (
+      {loading ? (
+        spinner
+      ) : (
         <BookInformationForm
-          loading={loading}
           handleSaveBook={handleSaveBook}
           buttonName="Update"
           bookData={book}
         />
-      ) : null}
+      )}
     </div>
   );
 }
