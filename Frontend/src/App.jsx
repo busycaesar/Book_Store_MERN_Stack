@@ -11,6 +11,7 @@ import Spinner from "./Components/Spinner";
 
 export const LoadingContext = createContext();
 export const BackButtonContext = createContext();
+export const BACKEND_URL = "http://localhost:5555";
 
 const App = () => {
   const [loading, setLoading] = useState(false);

@@ -14,11 +14,17 @@ import { useState } from "react";
 
 export default function BookInformationForm(props) {
   const [title, setTitle] = useState(props.bookData?.title || ""),
-    [author, setAuthor] = useState(props.bookData?.author || ""),
+    [author, setAuthor] = useState(
+      props.bookData?.author?.join(",").replace(/,/g, ", ") || ""
+    ),
     [publishYear, setPublishYear] = useState(props.bookData?.publishYear || "");
   let handleSaveBook = props.handleSaveBook,
     buttonName = props.buttonName,
-    bookData = { title, author, publishYear };
+    bookData = {
+      title,
+      author: [author.split(",").map((auth) => auth.trim())],
+      publishYear,
+    };
   return (
     <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
       <div className="my-4">

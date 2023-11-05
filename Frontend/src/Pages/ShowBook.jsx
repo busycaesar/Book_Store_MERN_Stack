@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { LoadingContext, BackButtonContext } from "../App";
+import { LoadingContext, BackButtonContext, BACKEND_URL } from "../App";
 
 export default function ShowBook() {
   const [book, setBook] = useState({}),
@@ -13,7 +13,7 @@ export default function ShowBook() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/books/${id}`)
+      .get(`${BACKEND_URL}/books/${id}`)
       .then((res) => {
         setBook(res.data);
         setLoading(false);
@@ -38,7 +38,7 @@ export default function ShowBook() {
           </div>
           <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">Author</span>
-            <span>{book.author}</span>
+            <span>{book.author?.join(",").replace(/,/g, ", ")}</span>
           </div>
           <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">Publish Year</span>

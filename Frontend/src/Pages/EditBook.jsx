@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { LoadingContext, BackButtonContext } from "../App";
+import { LoadingContext, BackButtonContext, BACKEND_URL } from "../App";
 import BookInformationForm from "../ProjectComponents/bookInformationForm";
 
 export default function EditBooks() {
@@ -15,7 +15,7 @@ export default function EditBooks() {
     handleSaveBook = (bookData) => {
       setLoading(true);
       axios
-        .put(`http://localhost:5555/books/${id}`, bookData)
+        .put(`${BACKEND_URL}/books/${id}`, bookData)
         .then(() => {
           setLoading(false);
           navigate("/");
@@ -29,7 +29,7 @@ export default function EditBooks() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/books/${id}`)
+      .get(`${BACKEND_URL}/books/${id}`)
       .then((res) => {
         setLoading(false);
         setBook(res.data);

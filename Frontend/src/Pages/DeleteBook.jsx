@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { BackButtonContext, LoadingContext } from "../App";
+import { BackButtonContext, LoadingContext, BACKEND_URL } from "../App";
 
 export default function DeleteBooks() {
   const { loading, setLoading, spinner } = useContext(LoadingContext),
@@ -14,7 +14,7 @@ export default function DeleteBooks() {
     handleDeleteBook = () => {
       setLoading(true);
       axios
-        .delete(`http://localhost:5555/books/${id}`)
+        .delete(`${BACKEND_URL}/books/${id}`)
         .then(() => {
           setLoading(false);
           navigate("/");
@@ -32,7 +32,7 @@ export default function DeleteBooks() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/books/${id}`)
+      .get(`${BACKEND_URL}/books/${id}`)
       .then((res) => {
         setLoading(false);
         setBookTitle(res.data.title);

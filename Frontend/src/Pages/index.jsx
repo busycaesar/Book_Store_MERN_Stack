@@ -57,7 +57,7 @@ export default function Home() {
                   {book.title}
                 </td>
                 <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                  {book.author}
+                  {book.author?.join(",").replace(/,/g, ", ")}
                 </td>
                 <td className="border border-slate-700 rounded-md text-center max-md:hidden">
                   {book.publishYear}
