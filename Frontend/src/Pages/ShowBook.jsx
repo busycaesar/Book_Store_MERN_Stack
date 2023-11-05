@@ -8,7 +8,7 @@ import { LoadingContext, BackButtonContext } from "../App";
 export default function ShowBook() {
   const [book, setBook] = useState({}),
     { id } = useParams(),
-    { loading, setLoading, spinner } = useContext(LoadingContext.loading),
+    { loading, setLoading, spinner } = useContext(LoadingContext),
     backButton = useContext(BackButtonContext);
   useEffect(() => {
     setLoading(true);

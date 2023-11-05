@@ -11,7 +11,6 @@ export default function CreateBooks() {
     navigate = useNavigate(),
     handleSaveBook = (bookdata) => {
       setLoading(true);
-      console.log(bookdata);
       axios
         .post("http://localhost:5555/books", bookdata)
         .then(() => {
