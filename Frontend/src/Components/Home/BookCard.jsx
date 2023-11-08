@@ -34,10 +34,7 @@ export default function BookCard(props) {
       <div className="flex justify-between items-center gap-x-2 mt-4 p-4">
         <BiShow
           className="text-3-xl text-blue-800 hover:text-black cursor-pointer"
-          onClick={() => {
-            setShowModal(true);
-            console.log("Show Modal", showModal);
-          }}
+          onClick={() => setShowModal(true)}
         />
         <Link to={`/books/details/${book?._id}`}>
           <BsInfoCircle className="text-2xl text-green-800 hover:text-black" />
