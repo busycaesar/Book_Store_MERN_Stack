@@ -4,17 +4,20 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { LoadingContext, BackButtonContext, BACKEND_URL } from "../App";
 import BookInformationForm from "../ProjectComponents/bookInformationForm";
+import { useSnackbar } from "notistack";
 
 export default function CreateBooks() {
   const { loading, setLoading, spinner } = useContext(LoadingContext),
     backButton = useContext(BackButtonContext),
     navigate = useNavigate(),
+    { enqueueSnackbar } = useSnackbar(),
     handleSaveBook = (bookdata) => {
       setLoading(true);
       axios
         .post(`${BACKEND_URL}/books`, bookdata)
         .then(() => {
           setLoading(false);
+          enqueueSnackbar("Book Created Successfully!", { variant: "success" });
           navigate("/");
         })
         .catch((err) => {
