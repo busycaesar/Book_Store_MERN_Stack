@@ -19,17 +19,21 @@ export default function BookModal(props) {
           className="absolute right-6 top-6 text-3xl text-3xl text-red-600 cursor-pointer"
           onClick={onClose}
         />
-        <h2 className="w-fit px-4 py-1 bg-red-300 rounded-lg">
+        <h2 className="w-fit mb-7 px-4 py-1 bg-red-300 rounded-lg">
           {book?.publishYear}
         </h2>
-        <h3 className="my-2 text-gray-500">{book?._id}</h3>
         <div className="flex justify-start items-center gap-x-2">
           <PiBookOpenTextLight className="text-red-300 text-2xl" />
-          <h2 className="my-1">{book?.title}</h2>
+          <h2 className="my-1">
+            <strong>Title:</strong> {book?.title}
+          </h2>
         </div>
         <div className="flex justify-start items-center gap-x-2">
           <BiUserCircle className="text-red-300 text-2xl" />
-          <h2 className="my-1">{book?.author}</h2>
+          <h2 className="my-1">
+            <strong>Author/s:</strong>{" "}
+            {book.author?.join(",").replace(/,/g, ", ")}
+          </h2>
         </div>
       </div>
     </div>
