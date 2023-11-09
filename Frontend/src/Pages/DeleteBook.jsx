@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { BackButtonContext, LoadingContext, BACKEND_URL } from "../App";
+import { useSnackbar } from "notistack";
 
 export default function DeleteBooks() {
   const { loading, setLoading, spinner } = useContext(LoadingContext),
@@ -11,17 +12,19 @@ export default function DeleteBooks() {
     navigate = useNavigate(),
     { id } = useParams(),
     [bookTitle, setBookTitle] = useState(""),
+    enqueueSnackbar = useSnackbar(),
     handleDeleteBook = () => {
       setLoading(true);
       axios
         .delete(`${BACKEND_URL}/books/${id}`)
         .then(() => {
           setLoading(false);
+          enqueueSnackbar("Book deleted successfully!", { varient: "success" });
           navigate("/");
         })
         .catch((err) => {
           setLoading(false);
-          alert("An error occured! Please check console.");
+          enqueueSnackbar("Error! Check console!", { varient: "error" });
           console.log(err);
         });
     },

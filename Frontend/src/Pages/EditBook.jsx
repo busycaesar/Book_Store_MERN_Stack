@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { LoadingContext, BackButtonContext, BACKEND_URL } from "../App";
 import BookInformationForm from "../ProjectComponents/bookInformationForm";
+import { useSnackbar } from "notistack";
 
 export default function EditBooks() {
   const [book, setBook] = useState({}),
@@ -12,17 +13,19 @@ export default function EditBooks() {
     { id } = useParams(),
     { loading, setLoading, spinner } = useContext(LoadingContext),
     backButton = useContext(BackButtonContext),
+    { enqueueSnackbar } = useSnackbar(),
     handleSaveBook = (bookData) => {
       setLoading(true);
       axios
         .put(`${BACKEND_URL}/books/${id}`, bookData)
         .then(() => {
           setLoading(false);
+          enqueueSnackbar("Book edited Successfully!", { varient: "success" });
           navigate("/");
         })
         .catch((err) => {
           setLoading(false);
-          alert("ERROR");
+          enqueueSnackbar("Error! Check console!", { varient: "error" });
           console.log(err);
         });
     };
