@@ -22,7 +22,7 @@ export default function CreateBooks() {
         })
         .catch((err) => {
           setLoading(false);
-          alert("ERROR");
+          enqueueSnackbar("Error! Check console!", { varient: "error" });
           console.log(err);
         });
     };
